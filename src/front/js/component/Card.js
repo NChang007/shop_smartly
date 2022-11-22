@@ -2,7 +2,6 @@ import { ListItem } from '@material-ui/core'
 import React from 'react'
 
 const Card = (props) => {
-  console.log(props.item.name);
   return (
     <div className="card" style={{"width": "12rem"}}>
         <img src={props.item.img} className="card-img-top" alt="..."/>

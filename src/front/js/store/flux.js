@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			specials:[],
 			electronics:[],
-			home:[]
+			homeStuff:[]
 		},
 		actions: {
 			syncTokenFromSessionStore: () => {
@@ -16,33 +16,89 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ token: null});
 			},
 
-			login: async(email, password) => {
+			login: async (email, password) => {
 				const opts = {
-					method: 'POST',
+				  method: "POST",
+				  mode: "cors",
+				  headers: {
+					"Content-Type": "application/json",
+					"Access-Control-Allow-Origin": "*",
+					// "Access-Control-Allow-Headers": "Origin",
+					//"X-Requested-With, Content-Type": "Accept",
+				  },
+				  body: JSON.stringify({
+					email: email,
+					password: password,
+				  }),
+				};
+				try {
+				  const resp = await fetch(
+					"https://nchang007-shopsmartly-717tjk4t1f9.ws-us77.gitpod.io/api/login",
+					opts
+				  );
+				  if (resp.status !== 200) {
+					alert("there has been an error");
+					return false;
+				  }
+				  const data = await resp.json();
+				  console.log(data);
+				  if (data.msg) {
+					setStore({ message: data.msg });
+				  } else {
+					sessionStorage.setItem("token", data.access_token);
+					setStore({ token: data.access_token});
+				  }
+		
+				  return true;
+				} catch (error) {
+				  console.error("there was an error", error);
+				}
+			  },
+			
+			// add user ------------------------------------------------------------------------------------------------------------------
+			createUser: async (Uname, email, password) => {
+				const opts = {
+					method: "POST",
+					mode: "cors",
 					headers: {
-						"content-Type": "application/json"
+					  "Content-Type": "application/json",
+					  "Access-Control-Allow-Origin": "*",
+					  // "Access-Control-Allow-Headers": "Origin",
+					  //"X-Requested-With, Content-Type": "Accept",
 					},
 					body: JSON.stringify({
-						"email": email,
-						"password": password
-					})
-				}
-				try{
-					const resp = await fetch('/api/login', opts)		
-					if(resp.status !== 200){
-						alert("there was an error on the fetch response at login fetch")
-						return false;
+					  Uname: Uname,
+					  email: email,
+					  password: password,
+					}),
+				};
+				try {
+					const resp = await fetch(
+					  "https://nchang007-shopsmartly-717tjk4t1f9.ws-us77.gitpod.io/api/createUser",
+					  opts
+					);
+					if (resp.status !== 200) {
+					  alert("there has been an error");
+					  return false;
 					}
-					const data = await resp.json()
-						sessionStorage.setItem("token", data.access_token)
-						setStore({ token: data.access_token })
-						return true
-				}catch(error){
-					console.error('there was an error on the login fetch', error)
-				}
-			},
+					const data = await resp.json();
+					console.log(data);
+					if (data.status == "true") {
+						//rederect to login
+						// window.location.href ="https://3000-nchang007-finalproject-o8dy4ie9ail.ws-us60.gitpod.io/login"
+						setNewUser(false) 
+					  } else {
+						setStore({ message: data.msg });
+					  }
 
+					return true;
+				  } catch (error) {
+					console.error("there was an error", error);
+				  }
+			},
+			// GETTING THE CONTENT --------------------------------------------
 			loadContent: () => {
+				const store = getStore();
 				const opts = {
 					method: "GET",
 					mode: "cors",
@@ -57,14 +113,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch('customContent.json', opts)
 				.then((response) => response.json())
 				.then((data) => {
-					console.log('here', data);
-					let people = data.data
-					// console.log("PEOPLE", people)
-					setStore({people: people})
+					let specials = data.specials
+					let electronics = data.electronics
+					let homeStuff = data.homeStuff
+
+					setStore({specials:specials, electronics:electronics, homeStuff:homeStuff})
 				})
 				.catch((error) => {
 					//error handling
-					console.log('There is an error on the fetch at flux',error);
+					console.log('There is an error on the fetch at flux', error);
 				});
 			},
 
