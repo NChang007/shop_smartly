@@ -1,52 +1,74 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			specials:[],
+			electronics:[],
+			home:[]
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			syncTokenFromSessionStore: () => {
+				const token = sessionStorage.getItem('token');
+				if(token && token !="" && token !=undefined) setStore({ token: token});
 			},
 
-			getMessage: async () => {
+			logout: () => {
+				sessionStorage.removeItem('token');
+				setStore({ token: null});
+			},
+
+			login: async(email, password) => {
+				const opts = {
+					method: 'POST',
+					headers: {
+						"content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						"email": email,
+						"password": password
+					})
+				}
 				try{
-					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
+					const resp = await fetch('/api/login', opts)		
+					if(resp.status !== 200){
+						alert("there was an error on the fetch response at login fetch")
+						return false;
+					}
 					const data = await resp.json()
-					setStore({ message: data.message })
-					// don't forget to return something, that is how the async resolves
-					return data;
+						sessionStorage.setItem("token", data.access_token)
+						setStore({ token: data.access_token })
+						return true
 				}catch(error){
-					console.log("Error loading message from backend", error)
+					console.error('there was an error on the login fetch', error)
 				}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
+			loadContent: () => {
+				const opts = {
+					method: "GET",
+					mode: "cors",
+					headers: {
+					  "Content-Type": "application/json",
+					  "Access-Control-Allow-Origin": "*",
+					  //"Access-Control-Allow-Headers": "Origin",
+					  //"X-Requested-With, Content-Type": "Accept",
+					},
+				}
+				// fetch people from CustomContent
+				fetch('customContent.json', opts)
+				.then((response) => response.json())
+				.then((data) => {
+					console.log('here', data);
+					let people = data.data
+					// console.log("PEOPLE", people)
+					setStore({people: people})
+				})
+				.catch((error) => {
+					//error handling
+					console.log('There is an error on the fetch at flux',error);
 				});
+			},
 
-				//reset the global store
-				setStore({ demo: demo });
-			}
+
 		}
 	};
 };

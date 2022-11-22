@@ -3,32 +3,41 @@ import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import Card from "../component/Card"
+import Banner from "../component/Banner";
 
-const specials = [
-	{
-		"name":"chair",
-		"cost":"$1",
-		"discription": "this is some text bc what else am i going to use lorem?? thas not smart"
-	},
-	{
-		"name":"the rise and fall of the third Reich",
-		"cost":"$1",
-		"discription": "this is some text bc what else am i going to use lorem?? thas not smart"
-	}
-]
+
+
 export const Home = () => {
-	const { store, actions } = useContext(Context);
-
 	return (
-		<div className="text-center mt-5">
-			<h2>Specials!</h2>
-			{/* <div className=" peopleCont">
+		<div className="text-center bodyCont bg-color04">
+			<Banner />
+			{/* <h2 className="color01">Specials!</h2>
+			<div className="itemCont">
 				{specials.map((item, idx) => {
 					return (
-						<div className="peopleDiv" key={idx}>
-							<Card person={item} id={idx} />
+						<div className="itemDiv" key={idx}>
+							<Card item={item} id={idx} />
 						</div>
-
+					)
+				})}
+			</div>
+			<h2 className="color01">Electronics!</h2>
+			<div className="itemCont">
+				{electronics.map((item, idx) => {
+					return (
+						<div className="itemDiv" key={idx}>
+							<Card item={item} id={idx} />
+						</div>
+					)
+				})}
+			</div>
+			<h2 className="color01">Home!</h2>
+			<div className="itemCont">
+				{homeStuff.map((item, idx) => {
+					return (
+						<div className="itemDiv" key={idx}>
+							<Card item={item} id={idx} />
+						</div>
 					)
 				})}
 			</div> */}
