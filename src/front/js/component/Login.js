@@ -8,22 +8,27 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   const { store, actions } = useContext(Context);
+  // login--------------------------------
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const history = useNavigate();
+  // Register ----------------------------
+  const [Remail, setRemail] = useState('');
+  const [Rpassword, setRpassword] = useState('');
   const [Uname, setUname] = useState('');
+
+  const history = useNavigate();
   const [newUser, setNewUser] = useState(false);
   const token = sessionStorage.getItem("token");
 
   const handleRegisterClick = (e) => {
     e.preventDefault();
     // console.log(e.target)
-    actions.createUser(Uname, email, password)
+    actions.createUser(Uname, Remail, Rpassword)
     
   }
   const handleLoginClick = (e) => {
     e.preventDefault();
-    // console.log(e.target)
+    console.log(e.target)
     actions.login(email, password)
        
   }
@@ -65,10 +70,10 @@ const Login = () => {
                     <input type={"text"} placeholder={'Name'} value={Uname} onChange={(e)=> setUname(e.target.value)}/>
                 </div>
                 <div className="input-field">
-                    <input type={"text"} placeholder={'Email'} value={email} onChange={(e)=> setEmail(e.target.value)}/>
+                    <input type={"text"} placeholder={'Email'} value={Remail} onChange={(e)=> setRemail(e.target.value)}/>
                 </div>
                 <div className="input-field">
-                    <input type={'password'} placeholder={'password'} value={password} onChange={(e)=> setPassword(e.target.value)}/>
+                    <input type={'password'} placeholder={'password'} value={Rpassword} onChange={(e)=> setRpassword(e.target.value)}/>
                 </div>
                 <a href="#" className="link">Forgot Your Password?</a>
                 <br/>

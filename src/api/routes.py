@@ -74,3 +74,8 @@ def createUser():
     # favorites = getUserFavorite(1)
     # favorites = [favorite.serialize() for user in User]
     return jsonify({"created": "Thanks. your register was successfully", "status": "true"}), 200
+
+@api.route('/test', methods=['GET'])
+def test():
+  print('here')
+  return jsonify({"created": "Thanks. your register was successfully", "status": "true"}), 200

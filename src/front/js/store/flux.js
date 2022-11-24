@@ -1,6 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			token: null,
+			message: null,
 			specials:[],
 			electronics:[],
 			homeStuff:[]
@@ -33,7 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				try {
 				  const resp = await fetch(
-					"https://nchang007-shopsmartly-717tjk4t1f9.ws-us77.gitpod.io/api/login",
+					"https://3001-nchang007-shopsmartly-717tjk4t1f9.ws-us77.gitpod.io/api/login",
 					opts
 				  );
 				  if (resp.status !== 200) {
@@ -56,25 +58,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 			  },
 			
 			// add user ------------------------------------------------------------------------------------------------------------------
-			createUser: async (Uname, email, password) => {
+			createUser: async (Uname, Remail, Rpassword) => {
 				const opts = {
 					method: "POST",
 					mode: "cors",
 					headers: {
 					  "Content-Type": "application/json",
 					  "Access-Control-Allow-Origin": "*",
-					  // "Access-Control-Allow-Headers": "Origin",
-					  //"X-Requested-With, Content-Type": "Accept",
+					//   "Access-Control-Allow-Headers": "Origin",
+					//   "X-Requested-With, Content-Type": "Accept",
 					},
 					body: JSON.stringify({
 					  Uname: Uname,
-					  email: email,
-					  password: password,
+					  email: Remail,
+					  password: Rpassword,
 					}),
 				};
 				try {
 					const resp = await fetch(
-					  "https://nchang007-shopsmartly-717tjk4t1f9.ws-us77.gitpod.io/api/createUser",
+					  "https://3001-nchang007-shopsmartly-717tjk4t1f9.ws-us77.gitpod.io/api/createUser",
 					  opts
 					);
 					if (resp.status !== 200) {
@@ -85,7 +87,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(data);
 					if (data.status == "true") {
 						//rederect to login
-						// window.location.href ="https://3000-nchang007-finalproject-o8dy4ie9ail.ws-us60.gitpod.io/login"
+						// window.location.href =""
 						setNewUser(false) 
 					  } else {
 						setStore({ message: data.msg });
