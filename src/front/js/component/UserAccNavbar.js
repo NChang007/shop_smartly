@@ -5,47 +5,45 @@ import Tabs from "@material-ui/core/Tabs";
 import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
 
 
-
-const SecondNav = () => {
+const UserAccNavbar = () => {
     const [value, setValue] = React.useState(0);
     const theme = createTheme({
         overrides: {
           MuiTabs: {
             root: {
-              backgroundColor: "#183e4b"
+              backgroundColor: "white"
             },
             indicator: {
-              backgroundColor: '#d74a49'
+              backgroundColor: '#fffff'
             }
           },
           MuiTab: {
             root: {
               "&$selected": {
-                color: "#d74a49",
+                color: "#fffff",
       
                 "&:hover": {
-                  color: "#d74a49"
+                  color: "#fffff"
                 }
               }
             },
             wrapper: {
-              color: "#d74a49"
+              color: "#fffff"
             }
           }
         }
       });
     let categories = <h2>hello</h2>
     let categories2 = <h2>world</h2>
-    let categories3 = <h2>hello world</h2>
     return (
         <div
         style={{
             // marginLeft: "40%",
-            background: "#183e4b",
+            background: "#fffff",
             borderTop: "1px solid white"
         }}
         >
-            <Paper square>
+            
                 <MuiThemeProvider theme={theme}>
                     <Tabs
                         value={value}
@@ -58,21 +56,17 @@ const SecondNav = () => {
                         }}
                     >
                         <Tab 
-                            label="Categories" 
-                            key='1' 
+                            label="Cart" 
+                            key='0' 
                         />
-                        <Tab label="Buget Buddy" key='2' />
-                        <Tab label="Don't click me!" key='3' />
+                        <Tab label="Buget Buddy" key='1' />
                     </Tabs>
-                    {value == 0 ? "" : ""}
-                    {value == 1 ? categories : ""}
-                    {value == 2 ? categories2 : ""}
-                    {value == 3 ? categories3 : ""}
+                    {value == 0 ? categories : ""}
+                    {value == 1 ? categories2 : ""}
                 </MuiThemeProvider>
-            </Paper>
+           
        
         </div>
     )
 }
-
-export default SecondNav
+export default UserAccNavbar

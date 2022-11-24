@@ -14,9 +14,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			logout: () => {
-				sessionStorage.removeItem('token');
-				setStore({ token: null});
-			},
+				const token = sessionStorage.removeItem("token");
+				setStore({ token: null });
+				//redirect here
+				// window.location.href ="https://3000-nchang007-finalproject-o8dy4ie9ail.ws-us60.gitpod.io/login"
+			  },
 
 			login: async (email, password) => {
 				const opts = {
