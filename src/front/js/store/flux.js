@@ -5,7 +5,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			specials:[],
 			electronics:[],
-			homeStuff:[]
+			homeStuff:[],
+			budgetBuddy:[]
 		},
 		actions: {
 			syncTokenFromSessionStore: () => {
@@ -128,7 +129,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log('There is an error on the fetch at flux', error);
 				});
 			},
+			addToBudgetBuddy: (name, price) => {
+				const budgetBuddy = getStore().budgetBuddy
+				budgetBuddy.push(name, price)
+				setStore({favorites: favorites})
+			},
 
+			removeFromBudgetBuddy: (idx) => {
+				const budgetBuddy = getStore().budgetBuddy
+				let filtered = budgetBuddy.filter((f, i) => i !== idx)
+				setStore({favorites: filtered})
+			}
 
 		}
 	};

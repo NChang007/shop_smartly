@@ -4,6 +4,7 @@ import "../../styles/home.css";
 // import Pagination from "../component/Pagination";
 import Card from "../component/Card"
 import Banner from "../component/Banner";
+import BudgetBuddy from "../component/BudgetBuddy";
 
 
 
@@ -42,6 +43,8 @@ export const Home = () => {
 					)
 				})}
 			</div>
+
+			<BudgetBuddy />
 		</div>
 	);
 };
