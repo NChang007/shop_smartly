@@ -86,6 +86,11 @@ const BudgetBuddy = () => {
                                 <button className='button-delete task-button' onClick={() => handleDelete(todo)}>
                                     <i className='fa fa-trash'></i>
                                 </button>
+                                {store.favorites.map((fav, i) => {
+
+                                    return <a className="dropdown-item" key={i} href="#"> {fav} <i onClick={()=>actions.deleteFavorite(i)} className="fas fa-trash"></i></a>
+
+                                })}
                                 
                             </li>
                         ))}

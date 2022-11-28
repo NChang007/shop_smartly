@@ -11,21 +11,18 @@
 .navbar-brand:hover {
     color: #d74a49;
 }
-
 /* card----------------------------- */
 .card {
     white-space: pre-line;
 }
-.card > img {
+.card-img {
     max-height: 12rem;    
     min-height: 12rem;
-    height: auto;
 }
 .card > .card-body {
     height: 4rem;
     overflow: hidden;
 }
-
 /* home--------------------------- */
 .bodyCont {
     width: 100%;
@@ -88,6 +85,29 @@
     align-items: center;
 }
 
+/* ViewItems---------------------------- */
+.viewitemPageContainer{
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.viewPageImg {
+  width: 400px;
+  margin-right: 1rem;
+}
+.midSection > h1 {
+  border-bottom: 1px solid;
+}
+.costSelect {
+  /* width: 200px; */
+  height: 30px;
+  background: #1b4552;
+  color: white;
+}
+.costSelect > option{
+  color: white;
+}
 /* Colors-------------- */
 .bg-color01 {
   background-color: #d74a49;
@@ -205,7 +225,6 @@
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
   }
-  
   .login-form .action button:hover {
     background: #d8d8d8;
   }
@@ -303,7 +322,6 @@
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
   }
-  
   .register-form .action button:hover {
     background: #d8d8d8;
   }

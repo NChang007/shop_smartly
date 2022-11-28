@@ -139,7 +139,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const budgetBuddy = getStore().budgetBuddy
 				let filtered = budgetBuddy.filter((f, i) => i !== idx)
 				setStore({favorites: filtered})
-			}
+			},
+			getSpecials: (idx) => {
+				const special = getStore().specials;
+				return special[idx];
+			},
+			getElectronics: (idx) => {
+				const electronics = getStore().electronics;
+				return electronics[idx];
+			},
+			getHomeStuff: (idx) => {
+				const homeStuff = getStore().homeStuff;
+				return homeStuff[idx];
+			},
 
 		}
 	};

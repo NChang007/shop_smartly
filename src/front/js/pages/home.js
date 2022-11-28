@@ -18,7 +18,7 @@ export const Home = () => {
 				{store.specials.map((item, idx) => {
 					return (
 						<div className="itemDiv" key={idx}>
-							<Card item={item} id={idx} />
+							<Card item={item} id={idx} type="specials"/>
 						</div>
 					)
 				})}
@@ -28,7 +28,7 @@ export const Home = () => {
 				{store.electronics.map((item, idx) => {
 					return (
 						<div className="itemDiv" key={idx}>
-							<Card item={item} id={idx} />
+							<Card item={item} id={idx} type="electronics"/>
 						</div>
 					)
 				})}
@@ -38,7 +38,7 @@ export const Home = () => {
 				{store.homeStuff.map((item, idx) => {
 					return (
 						<div className="itemDiv" key={idx}>
-							<Card item={item} id={idx} />
+							<Card item={item} id={idx} type="homeStuff"/>
 						</div>
 					)
 				})}

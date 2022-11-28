@@ -21,7 +21,7 @@ const Login = () => {
   const [newUser, setNewUser] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const token = sessionStorage.getItem("token");
-
+        console.log(token);
   const handleRegisterClick = (e) => {
     e.preventDefault();
     // console.log(e.target)
