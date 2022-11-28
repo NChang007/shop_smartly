@@ -1,15 +1,47 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Login from "./Login";
+import { Context } from "../store/appContext";
+import queryString from "querystring-es3";
 
 
 export const Navbar = () => {
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
+	const { store, actions } = useContext(Context);
+	const [items, setItems] = useState([]);
+
+	useEffect(() => {
+		actions.searchHash("")
+		const qs = queryString.parse(location.hash);
+		console.log("This is parsed info: ", qs);
+		searchFunction(qs.keyword);
+	}, [store.specials]);
+	
+	// const searchFunction = keyword => {
+	// 	console.log("Search function keyword: ", keyword);
+	// 	let filteredArray = store.specials.filter(item => {
+	// 		if (keyword == "" || keyword == undefined) {
+	// 			return item;
+	// 		} else if (item.breedName.toLowerCase().includes(keyword.toLowerCase())) {
+	// 			return item;
+	// 		}
+	// 	});
+	// 	setItems(filteredArray);
+	// };
+	
+	// const searchHash = word => {
+	// 	searchFunction(word);
+	// 	if (word == "") {
+	// 		setItems(store.specials);
+	// 	}
+	// 	location.hash = `keyword=${word}`;
+	// };
+
 
 	return (
 		<nav className="navbar navbar-expand-lg bg-color02">
@@ -20,15 +52,16 @@ export const Navbar = () => {
 				</button>
 				
 				<form className="search d-flex" role="search">
-					<input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+					<input 
+						className="form-control me-2" 
+						type="search" 
+						placeholder="Search" 
+						aria-label="Search"
+						onChange={event => searchHash(event.target.value)}
+					/>
 					{/* <button className="btn btn-outline-success" type="submit">Search</button> */}
 				</form>
 
-				{/* <ul className="navbar-nav ">
-					<li className="nav-item">
-						<a className="nav-link color05" aria-current="page" href="#">LogIn</a>
-					</li>					
-				</ul> */}
 				<Button variant="primary" onClick={handleShow}>
 					LogIn
 				</Button>

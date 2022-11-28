@@ -73,9 +73,12 @@
 		]
 	},
 	"dependencies": {
+		"@billjs/query-string": "^1.0.2",
 		"@material-ui/core": "^4.12.4",
 		"bootstrap": "^5.2.3",
 		"prop-types": "^15.6.1",
+		"querystring": "^0.2.1",
+		"querystring-es3": "^0.2.1",
 		"react": "^16.8.4",
 		"react-bootstrap": "^2.6.0",
 		"react-dom": "^16.8.4",

@@ -18,7 +18,12 @@ export const Home = () => {
 				{store.specials.map((item, idx) => {
 					return (
 						<div className="itemDiv" key={idx}>
-							<Card item={item} id={idx} type="specials"/>
+							<Card 
+								item={item} 
+								id={idx} 
+								type="specials" 
+								search={store.searchHash}
+							/>
 						</div>
 					)
 				})}

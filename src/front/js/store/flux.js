@@ -153,6 +153,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return homeStuff[idx];
 			},
 
+			searchFunction: (keyword) => {
+				console.log("Search function keyword: ", keyword);
+				let filteredArray = store.specials.filter(item => {
+					if (keyword == "" || keyword == undefined) {
+						return item;
+					} else if (item.name.toLowerCase().includes(keyword.toLowerCase())) {
+						return item;
+					}
+				});
+				setItems(filteredArray);
+			},
+			searchHash: (word) => {
+				searchFunction(word);
+				if (word == "") {
+					setItems(store.specials);
+				}
+				location.hash = `keyword=${word}`;
+			},
+
 		}
 	};
 };
