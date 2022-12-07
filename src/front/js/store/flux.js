@@ -6,7 +6,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			specials:[],
 			electronics:[],
 			homeStuff:[],
-			budgetBuddy:[]
+			budgetBuddy:[],
+			// Filtered by search----
+			filteredSpecials:[]
 		},
 		actions: {
 			syncTokenFromSessionStore: () => {
@@ -129,6 +131,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log('There is an error on the fetch at flux', error);
 				});
 			},
+			// Budget Buddy-------------------------------------------------
 			addToBudgetBuddy: (name, price) => {
 				const budgetBuddy = getStore().budgetBuddy
 				budgetBuddy.push(name, price)
@@ -140,6 +143,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let filtered = budgetBuddy.filter((f, i) => i !== idx)
 				setStore({favorites: filtered})
 			},
+
 			getSpecials: (idx) => {
 				const special = getStore().specials;
 				return special[idx];
@@ -153,25 +157,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return homeStuff[idx];
 			},
 
-			searchFunction: (keyword) => {
-				console.log("Search function keyword: ", keyword);
-				let filteredArray = store.specials.filter(item => {
-					if (keyword == "" || keyword == undefined) {
-						return item;
-					} else if (item.name.toLowerCase().includes(keyword.toLowerCase())) {
-						return item;
-					}
-				});
-				setItems(filteredArray);
-			},
-			searchHash: (word) => {
-				searchFunction(word);
-				if (word == "") {
-					setItems(store.specials);
-				}
-				location.hash = `keyword=${word}`;
-			},
-
+			putInFiltered: (array) => {
+				const store = getStore();
+				let filtered = array
+				setStore({filteredSpecials: filtered})
+			}
 		}
 	};
 };

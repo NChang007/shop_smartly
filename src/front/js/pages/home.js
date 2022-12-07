@@ -6,11 +6,7 @@ import Card from "../component/Card"
 import Banner from "../component/Banner";
 import BudgetBuddy from "../component/BudgetBuddy";
 
-
-
-export const Home = () => {
-	const { store, actions } = useContext(Context);
-	return (
+let myHome = 
 		<div className="text-center bodyCont bg-color04">
 			<Banner />
 			<h2 className="color01">Specials!</h2>
@@ -22,7 +18,7 @@ export const Home = () => {
 								item={item} 
 								id={idx} 
 								type="specials" 
-								search={store.searchHash}
+								// search={searchHash}
 							/>
 						</div>
 					)
@@ -48,8 +44,12 @@ export const Home = () => {
 					)
 				})}
 			</div>
-
-			<BudgetBuddy />
 		</div>
+
+export const Home = () => {
+	const { store, actions } = useContext(Context);
+
+	return (
+		{myHome}
 	);
 };
