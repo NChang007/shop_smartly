@@ -4,52 +4,25 @@ import "../../styles/home.css";
 // import Pagination from "../component/Pagination";
 import Card from "../component/Card"
 import Banner from "../component/Banner";
-import BudgetBuddy from "../component/BudgetBuddy";
+import { useParams } from 'react-router-dom';
+import RegularView from "./RegularView";
+import FilteredView from "./FilteredView";
 
-let myHome = 
-		<div className="text-center bodyCont bg-color04">
-			<Banner />
-			<h2 className="color01">Specials!</h2>
-			<div className="itemCont">
-				{store.specials.map((item, idx) => {
-					return (
-						<div className="itemDiv" key={idx}>
-							<Card 
-								item={item} 
-								id={idx} 
-								type="specials" 
-								// search={searchHash}
-							/>
-						</div>
-					)
-				})}
-			</div>
-			<h2 className="color01">Electronics!</h2>
-			<div className="itemCont">
-				{store.electronics.map((item, idx) => {
-					return (
-						<div className="itemDiv" key={idx}>
-							<Card item={item} id={idx} type="electronics"/>
-						</div>
-					)
-				})}
-			</div>
-			<h2 className="color01">Home!</h2>
-			<div className="itemCont">
-				{store.homeStuff.map((item, idx) => {
-					return (
-						<div className="itemDiv" key={idx}>
-							<Card item={item} id={idx} type="homeStuff"/>
-						</div>
-					)
-				})}
-			</div>
-		</div>
+// let params = useParams()
+// console.log(useParams())
+
+// let myHome = <RegularView />
+
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-
+	let nothome = store.notHome
+	console.log(nothome);
 	return (
-		{myHome}
+		<div>
+			{/* {nothome == false ? <FilteredView/> : <RegularView/>} */}
+			{nothome == false ? <RegularView/> : <FilteredView/>}
+		
+		</div>
 	);
 };

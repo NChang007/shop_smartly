@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext, useState, useEffect } from "react";
+import { Context } from "../store/appContext";
+import Card from "../component/Card";
 
 const FilteredView = () => {
+    const { store, actions } = useContext(Context);
   return (
-    <div className="itemCont">
+    <div className="">
         {store.filteredSpecials.map((item, idx) => {
             return (
                 <div className="itemDiv" key={idx}>

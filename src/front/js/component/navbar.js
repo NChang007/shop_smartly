@@ -14,8 +14,7 @@ export const Navbar = () => {
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 	const { store, actions } = useContext(Context);
-	// const [items, setItems] = useState();
-	// setItems(store.specials)
+	
 
 	
 

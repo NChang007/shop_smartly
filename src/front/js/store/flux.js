@@ -8,7 +8,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			homeStuff:[],
 			budgetBuddy:[],
 			// Filtered by search----
-			filteredSpecials:[]
+			filteredSpecials:[],
+			notHome: false,
+			allData: []
 		},
 		actions: {
 			syncTokenFromSessionStore: () => {
@@ -21,7 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ token: null });
 				//redirect here
 				// window.location.href ="https://3000-nchang007-finalproject-o8dy4ie9ail.ws-us60.gitpod.io/login"
-			  },
+			},
 
 			login: async (email, password) => {
 				const opts = {
@@ -60,7 +62,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 				  console.error("there was an error", error);
 				}
-			  },
+			},
 			
 			// add user ------------------------------------------------------------------------------------------------------------------
 			createUser: async (Uname, Remail, Rpassword) => {
@@ -123,7 +125,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let specials = data.specials
 					let electronics = data.electronics
 					let homeStuff = data.homeStuff
-
+					let myArr = specials
+								.concat(electronics)
+								.concat(homeStuff)
+					console.log(myArr);
+					// myArr.concat(data.electronics)
+					
+					setStore({allData:myArr})
+					// store.allData.push(electronics)
 					setStore({specials:specials, electronics:electronics, homeStuff:homeStuff})
 				})
 				.catch((error) => {
@@ -161,7 +170,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				let filtered = array
 				setStore({filteredSpecials: filtered})
-			}
+			},
+			notHomeTrueOrFalse: (e) => {
+				let notHome = getStore().notHome
+				notHome = e
+				setStore({notHome:notHome})
+			},
 		}
 	};
 };
